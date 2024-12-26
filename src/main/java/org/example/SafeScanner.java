@@ -1,6 +1,6 @@
 package org.example;
 import java.util.Scanner;
-public class HataYakalama {
+
 
     /* Hatalari ele almak icin tanimladigim ozel scanner sinifi.
     Calisma prensibi girdiyi string olarak alıp onu istenen tipte ki degere cevirmeye calismak basaramazsa
@@ -59,4 +59,3 @@ while (girdi >= taban&&girdi <= azami) {
     return girdi;
 }
      }
-}
