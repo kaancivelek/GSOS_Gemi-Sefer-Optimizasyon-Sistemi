@@ -47,6 +47,8 @@ public abstract class Gemi {
             this.bakimDurumu = bakimDurumu;
             this.yakitKalitesi = yakitKalitesi;
             this.yakitMik = yakitMik;
+            yakitBilgisi();
+
         }
 
         // Metotlar
@@ -55,21 +57,22 @@ public abstract class Gemi {
             return true;
         }
 
-        public String motorCalistir() {
-            return "Motor çalıştırıldı.";
+        public void  motorCalistir() {
+
         }
 
-        public String motorDurdur() {
-            return "Motor durduruldu.";
+        public void  motorDurdur() {
+
         }
 
-        public String yakitBilgisi() {
-            return "Yakıt bilgisi: Kalite = " + yakitKalitesi + ", Miktar = " + yakitMik;
+        public void yakitBilgisi() {
+            System.out.println("Yakıt bilgisi:\n Kalite = " + yakitKalitesi + ", Miktar = " + yakitMik);
         }
     }
 }
 
 class YukGemisi extends Gemi {
+
 
    String gemiAdi;
 
@@ -103,8 +106,10 @@ class YukGemisi extends Gemi {
     }
 
     YukGemisi()
-    {
-        super();
+    {super();
+
+
+
 
         System.out.println("değerleri giriniz:");
         System.out.println("gemi adini giriniz:");
@@ -131,6 +136,7 @@ class YukGemisi extends Gemi {
         this.gemiAdi=gemiAdi;
 
         gemiBilgisi();
+        Motor m= new Motor(55,25,24,true,"a kalite",2500);
         }
 
 
