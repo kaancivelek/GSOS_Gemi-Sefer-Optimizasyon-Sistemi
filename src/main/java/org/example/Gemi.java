@@ -1,7 +1,10 @@
 package org.example;
 
-public abstract class Gemi {
+import java.util.Scanner;
 
+public abstract class Gemi {
+    GuvenliScanner gs = new GuvenliScanner();
+    Scanner s = new Scanner(System.in);
      String yapiMalzeme;
      double agirlik;
      double hacim;
@@ -9,7 +12,7 @@ public abstract class Gemi {
      double yukMik;
      double hiz;
 
-    public Gemi(String yapiMalzeme, double agirlik, double hacim, double azamiYuk, double yukMik, double hiz) {
+    public Gemi() {
         this.yapiMalzeme = yapiMalzeme;
         this.agirlik = agirlik;
         this.hacim = hacim;
@@ -19,20 +22,14 @@ public abstract class Gemi {
     }
 
 
-    public double yukMikHesapla() {
-        // Yük miktarı hesaplama işlemleri
-        return 0.0;
-    }
+    public abstract void yukMikHesapla();
 
-    public String gemiCalistir() {
-        return "Gemi çalıştırıldı.";
-    }
+    public abstract void  gemiCalistir();
 
-    public String gemiDurdur() {
-        return "Gemi durduruldu.";
-    }
+    public abstract void   gemiBilgisi();
 
-    // İç Sınıf
+    public abstract void  gemiDurdur();
+
     public class Motor {
 
         private double metalYorgunlugu;
@@ -74,8 +71,68 @@ public abstract class Gemi {
 
 class YukGemisi extends Gemi {
 
-    public YukGemisi(String yapiMalzeme, double agirlik, double hacim, double azamiYuk, double yukMik, double hiz)
+   String gemiAdi;
+
+    @Override
+    public void yukMikHesapla() {
+
+    }
+
+    @Override
+    public void gemiCalistir() {
+
+    }
+
+    @Override
+    public void gemiBilgisi() {
+        System.out.println("---GEMİ BİLGİSİ---");
+        System.out.println(
+                "adi:" +gemiAdi+"\n"+
+                "yapi malzemesi:" +yapiMalzeme+"\n"+
+                "agirligi:" +agirlik+"ton"+"\n"+
+                "hacmi" +hacim+"metreküp"+"\n"+
+                "azami yuk siniri:" +azamiYuk+"ton"+"\n"+
+                "yuk miktari:" +yukMik+"ton"+"\n"+
+                "hizi:" +hiz+"km"
+                );
+    }
+
+    @Override
+    public void gemiDurdur() {
+
+    }
+
+    YukGemisi()
     {
-        super(yapiMalzeme, agirlik, hacim, azamiYuk, yukMik, hiz);}
+        super();
+
+        System.out.println("değerleri giriniz:");
+        System.out.println("gemi adini giriniz:");
+        String gemiAdi= s.nextLine();
+        System.out.println("Yapi malzemesi:");
+        String  yapiMalzeme= s.nextLine();;
+        System.out.println("Agirlik giriniz:");
+        double agirlik = gs.nextDouble();
+        System.out.println("Hacim giriniz:");
+        double hacim = gs.nextDouble();
+        System.out.println("azamiyuk giriniz:");
+        double azamiYuk= gs.nextDouble();
+        System.out.println("Yuk miktari giriniz:");
+        double yukMik=gs.nextDouble();
+        System.out.println("Hiz giriniz:");
+        double hiz = gs.nextDouble();
+
+        this.yapiMalzeme = yapiMalzeme;
+        this.agirlik = agirlik;
+        this.hacim = hacim;
+        this.azamiYuk = azamiYuk;
+        this.yukMik = yukMik;
+        this.hiz = hiz;
+        this.gemiAdi=gemiAdi;
+
+        gemiBilgisi();
+        }
+
+
     }
 
