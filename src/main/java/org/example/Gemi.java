@@ -5,6 +5,7 @@ import java.util.Scanner;
 public abstract class Gemi {
     GuvenliScanner gs = new GuvenliScanner();
     Scanner s = new Scanner(System.in);
+    String gemiAdi;
      String yapiMalzeme;
      double agirlik;
      double hacim;
@@ -13,12 +14,7 @@ public abstract class Gemi {
      double hiz;
 
     public Gemi() {
-        this.yapiMalzeme = yapiMalzeme;
-        this.agirlik = agirlik;
-        this.hacim = hacim;
-        this.azamiYuk = azamiYuk;
-        this.yukMik = yukMik;
-        this.hiz = hiz;
+
     }
 
 
@@ -76,7 +72,7 @@ public abstract class Gemi {
 class YukGemisi extends Gemi {
 
 
-   String gemiAdi;
+
 
     @Override
     public void yukMikHesapla() {
@@ -137,8 +133,9 @@ class YukGemisi extends Gemi {
         this.hiz = hiz;
         this.gemiAdi=gemiAdi;
 
-        gemiBilgisi();
-        Motor m= new Motor(55,25,24,true,"a kalite",2500);
+
+      /*  gemiBilgisi();*/
+        Motor m= new Motor(0,25,24,true,"a kalite",2500);
         }
 
 

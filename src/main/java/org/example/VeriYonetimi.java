@@ -29,16 +29,16 @@ class GemiListesi extends VeriYonetimi<Gemi> {
 
             // bu kısım tablo öğelerini ekrana yazdırmayı içeriyor.
             for (Gemi gemi : veriler) {
-         /*       System.out.printf(boyutlandirma,
-                         gemi.gemiAdi,
+               System.out.printf(boyutlandirma,
+                        gemi.gemiAdi,
                         gemi.yapiMalzeme,
                         String.format("%.2f", gemi.agirlik),
                         String.format("%.2f", gemi.hacim),
                         String.format("%.2f", gemi.azamiYuk),
                         String.format("%.2f", gemi.yukMik),
-                        String.format("%.2f", gemi.azamiHiz));
+                        String.format("%.2f", gemi.hiz));
             }System.out.println(cizgi);
-        */}
+        }
 
     }
 
@@ -104,8 +104,3 @@ class GemiListesi extends VeriYonetimi<Gemi> {
         }
     }
     }
-
-}
-
-
-
