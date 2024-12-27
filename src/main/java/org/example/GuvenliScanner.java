@@ -23,6 +23,8 @@ import java.util.Scanner;
                 girdi = scanner.nextLine();
                 try {
                     cikti = Integer.parseInt(girdi);
+                    if(cikti < 0) {System.out.println("Negatif sayi girisi yapamazsiniz.");break;
+                    }
                     gecerlilik = true;
 
                 } catch (NumberFormatException e) {System.out.println("Sadece sayi girebilirsiniz");}
@@ -40,6 +42,7 @@ import java.util.Scanner;
                 girdi = scanner.nextLine();
                 try {
                     cikti = Double.parseDouble(girdi);
+                    if(cikti < 0) {System.out.println("Negatif sayi girisi yapamazsiniz.");break;}
                     gecerlilik = true;
 
                 } catch (NumberFormatException e) {System.out.println("Sadece sayi girebilirsiniz");}}
