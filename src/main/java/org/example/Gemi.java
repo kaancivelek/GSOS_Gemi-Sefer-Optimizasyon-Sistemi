@@ -1,19 +1,14 @@
 package org.example;
 
+public abstract class Gemi {
 
+     String yapiMalzeme;
+     double agirlik;
+     double hacim;
+     double azamiYuk;
+     double yukMik;
+     double hiz;
 
-
-// Ana Sınıf
-public class Gemi {
-    // Özellikler
-    private String yapiMalzeme;
-    private double agirlik;
-    private double hacim;
-    private double azamiYuk;
-    private double yukMik;
-    private double hiz;
-
-    // Yapıcı Metot
     public Gemi(String yapiMalzeme, double agirlik, double hacim, double azamiYuk, double yukMik, double hiz) {
         this.yapiMalzeme = yapiMalzeme;
         this.agirlik = agirlik;
@@ -23,14 +18,6 @@ public class Gemi {
         this.hiz = hiz;
     }
 
-    // Metotlar
-    public String gemiBilgisi() {
-        return "Gemi bilgileri: Yapı Malzemesi = " + yapiMalzeme + ", Ağırlık = " + agirlik + ", Hacim = " + hacim + ", Azami Yük = " + azamiYuk + ", Yük Miktarı = " + yukMik + ", Hız = " + hiz;
-    }
-
-    public void yakitHesapla() {
-        // Yakıt hesaplama işlemleri
-    }
 
     public double yukMikHesapla() {
         // Yük miktarı hesaplama işlemleri
@@ -47,7 +34,7 @@ public class Gemi {
 
     // İç Sınıf
     public class Motor {
-        // Özellikler
+
         private double metalYorgunlugu;
         private double RPM;
         private double yakitTuketimi;
@@ -55,7 +42,7 @@ public class Gemi {
         private String yakitKalitesi;
         private double yakitMik;
 
-        // Yapıcı Metot
+
         public Motor(double metalYorgunlugu, double RPM, double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
             this.metalYorgunlugu = metalYorgunlugu;
             this.RPM = RPM;
@@ -85,20 +72,10 @@ public class Gemi {
     }
 }
 
-// Alt Sınıf
 class YukGemisi extends Gemi {
-    // Özellikler
-    private double kazanc;
 
-    // Yapıcı Metot
-    public YukGemisi(String yapiMalzeme, double agirlik, double hacim, double azamiYuk, double yukMik, double hiz, double kazanc) {
-        super(yapiMalzeme, agirlik, hacim, azamiYuk, yukMik, hiz);
-        this.kazanc = kazanc;
+    public YukGemisi(String yapiMalzeme, double agirlik, double hacim, double azamiYuk, double yukMik, double hiz)
+    {
+        super(yapiMalzeme, agirlik, hacim, azamiYuk, yukMik, hiz);}
     }
 
-    // Metotlar
-    public double kazancHesapla() {
-        // Kazanç hesaplama işlemleri
-        return 0.0;
-    }
-}
