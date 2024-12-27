@@ -41,6 +41,8 @@ public abstract class Gemi {
 
 
         public Motor(double metalYorgunlugu, double RPM, double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
+
+
             this.metalYorgunlugu = metalYorgunlugu;
             this.RPM = RPM;
             this.yakitTuketimi = yakitTuketimi;
