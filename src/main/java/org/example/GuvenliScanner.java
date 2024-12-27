@@ -8,10 +8,10 @@ import java.util.Scanner;
      */
 
 
-     class SafeScanner {
+     class GuvenliScanner {
 
         Scanner scanner = new Scanner(System.in);
-     SafeScanner() {}
+     GuvenliScanner() {}
 
         // Integer Degerler icin.
         int nextInt() {
@@ -51,7 +51,7 @@ import java.util.Scanner;
 aralikta ki tam sayilari girmesini sagliyoruz.*/
 int nextIntForNavigation(int taban, int azami) {
          int girdi= nextInt();
-while (girdi >= taban&&girdi <= azami) {
+while (!(girdi >= taban&&girdi <= azami)) {
     System.out.println("Sadece["+taban+" - "+azami+"]araliginda bir sayi girebilirsiniz.");
     girdi = nextInt();
 }
