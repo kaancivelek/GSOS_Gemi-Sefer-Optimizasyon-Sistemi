@@ -1,4 +1,4 @@
-package org.example;
+package org.gsos;
 
 public class Sefer {
    /* "Sefer Numarasi"
