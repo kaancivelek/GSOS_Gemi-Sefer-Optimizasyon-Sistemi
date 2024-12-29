@@ -63,7 +63,7 @@ class SeferKayitlari extends VeriYonetimi<Sefer> {
         System.out.println(cizgi);
 
         // Sefer verilerini ekrana yazdir.
-        for (Sefer sefer : veriler) {
+       /* for (Sefer sefer : veriler) {
              System.out.printf(boyutlandirma,
                     sefer.seferNumarasi,
                     sefer.gemiAdi,
@@ -73,7 +73,7 @@ class SeferKayitlari extends VeriYonetimi<Sefer> {
                     String.format("%.2f", sefer.toplamGelir),
                     String.format("%.2f", sefer.toplamGider));
             System.out.println(cizgi);
-        }
+        }*/
     }
 }
 
@@ -92,7 +92,7 @@ class SeferDetaylari extends VeriYonetimi<Sefer> {
         System.out.println(cizgi);
 
         // Sefer detaylarini ekrana yazdir.
-        for (Sefer sefer : veriler) {
+      /*  for (Sefer sefer : veriler) {
             System.out.printf(boyutlandirma,
                     sefer.Numarasi,
                     sefer.gemiAdi,
@@ -102,6 +102,6 @@ class SeferDetaylari extends VeriYonetimi<Sefer> {
                     String.format("%.2f", sefer.toplamGelir),
                     String.format("%.2f", sefer.toplamGider));
             System.out.println(cizgi);
-        }
+        }*/
     }
 }
