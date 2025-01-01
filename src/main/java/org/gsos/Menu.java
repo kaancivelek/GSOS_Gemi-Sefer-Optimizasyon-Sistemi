@@ -1,17 +1,21 @@
 package org.gsos;
-import  java.util.Scanner;
 
 public class Menu {
-   HataYakalama oku = new HataYakalama();
-    public  Menu(){
+    HataYakalama oku = new HataYakalama(); // Kullanıcı girişini kontrol eden sınıf
+
+    public Menu() {
+        // Ana menü seçeneklerini kullanıcıya sunar
         System.out.println("Lütfen Gemi Rotasını Belirleyin!");
         System.out.println("1: Hint Okyanusu");
         System.out.println("2: Atlas Okyanusu");
         System.out.println("3: Pasifik Okyanusu");
         System.out.println("4: Kuzey Kutup Rotası");
-        int rota1 = oku.nextIntForNavigation(1,4);
-        switch (rota1){
+
+        int rota = oku.nextIntForNavigation(1, 4); // Kullanıcıdan ana rota seçimi alır
+
+        switch (rota) {
             case 1:
+                // Hint Okyanusu alt menüsü
                 System.out.println("Lütfen Hint Okyanusu Rotasını Belirleyin!");
                 System.out.println("""
                         
@@ -24,18 +28,19 @@ public class Menu {
                         taşımacılığında kullanılır. Bengal Körfezi ve Malakka Boğazı üzerinden geçer.
                         
                         3: Avustralya (Perth) - Güney Afrika (Durban)
-                        Rotanın özellikleri: Hint Okyanusu boyunca uzun mesafeli bir rota. Çoğunlukla %n" +
-                        doğal kaynak ve mineral taşımacılığı için kullanılır.
+                        Rotanın özellikleri: Hint Okyanusu boyunca uzun mesafeli bir rota. Çoğunlukla doğal kaynak
+                        ve mineral taşımacılığı için kullanılır.
                         """);
 
-                int hintrota = oku.nextIntForNavigation(1,3);break;
+                int altRota = oku.nextIntForNavigation(1, 3); // Kullanıcıdan alt rota seçimi alır
+                break;
 
-                /*seçim yapıldıktan sonra rota bilgisi ilgili yere aktarılmalı */
             case 2:
+                // Atlas Okyanusu alt menüsü
                 System.out.println("Lütfen Atlas Okyanusu Rotasını Belirleyin!");
                 System.out.println(""" 
                         
-                        1: ABD (New York) - Avrupa (Rotterdam, Hollanda)" +
+                        1: ABD (New York) - Avrupa (Rotterdam, Hollanda)
                         Rotanın özellikleri: Kuzey Atlantik ticaret hattı. Dünyanın en yoğun ticaret 
                         yollarından biridir, konteyner taşımacılığı yaygındır.
             
@@ -45,17 +50,20 @@ public class Menu {
             
                         3: Kanada (Halifax) - Birleşik Krallık (Liverpool)
                         Rotanın özellikleri: Kuzey Atlantik üzerindeki bu rota, denizcilik açısından eski bir gelenektir.
-                         Çoğunlukla genel kargo ve konteyner taşımacılığı yapılır.
+                        Çoğunlukla genel kargo ve konteyner taşımacılığı yapılır.
                         """);
-                int atlasrota = oku.nextIntForNavigation(1,3);break;
+
+                altRota = oku.nextIntForNavigation(1, 3);
+                break;
 
             case 3:
+                // Pasifik Okyanusu alt menüsü
                 System.out.println("Lütfen Pasifik Okyanusu Rotasını Belirleyin!");
                 System.out.println("""
                         
                         1: Çin (Shanghai) - ABD (Los Angeles)
                         Rotanın özellikleri: Pasifik’teki en yoğun ticaret rotalarından biri.
-                         Elektronik ve diğer tüketim mallarını taşımada kullanılır.
+                        Elektronik ve diğer tüketim mallarını taşımada kullanılır.
               
                         2: Japonya (Tokyo) - Avustralya (Sydney)
                         Rotanın özellikleri: Asya-Pasifik ticareti için önemli bir rota.
@@ -65,9 +73,12 @@ public class Menu {
                         Rotanın özellikleri: Latin Amerika ile Asya arasında
                         bakır, meyve ve mineral taşımacılığı için kullanılır.
                         """);
-                int pasifikrota = oku.nextIntForNavigation(1,3);break;
+
+                altRota = oku.nextIntForNavigation(1, 3);
+                break;
 
             case 4:
+                // Kuzey Kutup Rotası alt menüsü
                 System.out.println("Lütfen Kuzey Kutup Rotasını Belirleyin!");
                 System.out.println("""
                         
@@ -75,10 +86,14 @@ public class Menu {
                         Rotanın özellikleri: Arktik rotası, buz kırıcı gemilerle Kuzey
                         Kutbu boyunca geçiş yapılmasını sağlar. Hızlı ama risklidir.
                         """);
-                int kutuprota = oku.nextIntForNavigation(1,1);break;
+
+                altRota = oku.nextIntForNavigation(1, 1);
+                break;
 
             default:
-                System.out.println("BUG!");break;
+                // Geçersiz seçim uyarısı
+                System.out.println("BUG!");
+                break;
         }
     }
 }
