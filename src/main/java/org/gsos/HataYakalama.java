@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Başaramazsa uyarı mesajı atıp tekrar değer girilmesini istiyor.
  */
 class HataYakalama {
-    Scanner scanner; // Referans tanımlandı ancak nesne oluşturulmadığı için bellekten harcmanmadı
+   private Scanner scanner; // Referans tanımlandı ancak nesne oluşturulmadığı için bellekten harcmanmadı
 
 
     // Negatif sayı hatası için özel istisna sınıfı

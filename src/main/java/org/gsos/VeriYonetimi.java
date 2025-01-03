@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 // T verisiyle calisan soyut sinif. Tum veri yonetim islemleri icin temel gorevleri saglar.
 abstract class VeriYonetimi<T> {
-    public ArrayList<T> veriler;
+    private ArrayList<T> veriler;
 
     public VeriYonetimi() {
         this.veriler = new ArrayList<>();
@@ -14,7 +14,7 @@ abstract class VeriYonetimi<T> {
     public void ekle(T kayit) {
         this.veriler.add(kayit);
     }
-
+    public ArrayList<T> getVeriler() {return veriler;}
     // Alt siniflarin doldurmasi gereken listeleme metodu.
     public abstract void listele();
 }
@@ -34,7 +34,7 @@ class GemiListesi extends VeriYonetimi<Gemi> {
         System.out.println(cizgi);
 
         // Gemi verilerini ekrana yazdir.
-        for (Gemi gemi : veriler) {
+        for (Gemi gemi : getVeriler()) {
             System.out.printf(boyutlandirma,
                     gemi.gemiAdi,
                     gemi.yapiMalzeme,
@@ -63,7 +63,7 @@ class SeferKayitlari extends VeriYonetimi<Sefer> {
         System.out.println(cizgi);
 
         // Sefer verilerini ekrana yazdir.
-       /* for (Sefer sefer : veriler) {
+       /* for (Sefer sefer : getVeriler()) {
              System.out.printf(boyutlandirma,
                     sefer.seferNumarasi,
                     sefer.gemiAdi,
@@ -92,7 +92,7 @@ class SeferDetaylari extends VeriYonetimi<Sefer> {
         System.out.println(cizgi);
 
         // Sefer detaylarini ekrana yazdir.
-      /*  for (Sefer sefer : veriler) {
+      /*  for (Sefer sefer : getVeriler()) {
             System.out.printf(boyutlandirma,
                     sefer.Numarasi,
                     sefer.gemiAdi,
