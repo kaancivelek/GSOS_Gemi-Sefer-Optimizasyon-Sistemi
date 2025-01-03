@@ -7,26 +7,27 @@ import java.util.Scanner;
  * Başaramazsa uyarı mesajı atıp tekrar değer girilmesini istiyor.
  */
 class HataYakalama {
-    private final Scanner scanner = new Scanner(System.in);
+    Scanner scanner; // Referans tanımlandı ancak nesne oluşturulmadığı için bellekten harcmanmadı
+
 
     // Negatif sayı hatası için özel istisna sınıfı
-    public class NegatifDogalSayiHatasi extends Exception {
-        public NegatifDogalSayiHatasi() {
+    private class NegatifDogalSayiHatasi extends Exception {
+        private NegatifDogalSayiHatasi() {
             super("Negatif sayı hatası.");
         }
 
-        public NegatifDogalSayiHatasi(String ileti) {
+        private NegatifDogalSayiHatasi(String ileti) {
             super(ileti);
         }
     }
 
     // Aralık dışı sayı hatası için özel istisna sınıfı
-    public class AralikDisiSayiHatasi extends Exception {
-        public AralikDisiSayiHatasi() {
+    private class AralikDisiSayiHatasi extends Exception {
+        private AralikDisiSayiHatasi() {
             super("Aralık dışı sayı hatası.");
         }
 
-        public AralikDisiSayiHatasi(String ileti) {
+        private AralikDisiSayiHatasi(String ileti) {
             super(ileti);
         }
     }
@@ -41,6 +42,7 @@ class HataYakalama {
         int cikti;
 
         while (true) {
+            scanner = new Scanner(System.in);
             girdi = scanner.nextLine();
             try {
                 cikti = Integer.parseInt(girdi);
@@ -68,6 +70,7 @@ class HataYakalama {
         double cikti;
 
         while (true) {
+            scanner = new Scanner(System.in);//nesne oluşturuldu ve bellekten yer ayrıldı
             girdi = scanner.nextLine();
             try {
                 cikti = Double.parseDouble(girdi);

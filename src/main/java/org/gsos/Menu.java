@@ -2,8 +2,11 @@ package org.gsos;
 
 public class Menu {
     HataYakalama oku = new HataYakalama(); // Kullanıcı girişini kontrol eden sınıf
+    int rota;
+    int altRota;
+    public Menu() {navigasyon();}
 
-    public Menu() {
+    public void navigasyon() {
         // Ana menü seçeneklerini kullanıcıya sunar
         System.out.println("Lütfen Gemi Rotasını Belirleyin!");
         System.out.println("1: Hint Okyanusu");
@@ -11,7 +14,7 @@ public class Menu {
         System.out.println("3: Pasifik Okyanusu");
         System.out.println("4: Kuzey Kutup Rotası");
 
-        int rota = oku.nextIntForNavigation(1, 4); // Kullanıcıdan ana rota seçimi alır
+        rota = oku.nextIntForNavigation(1, 4); // Kullanıcıdan ana rota seçimi alır
 
         switch (rota) {
             case 1:
@@ -32,7 +35,7 @@ public class Menu {
                         ve mineral taşımacılığı için kullanılır.
                         """);
 
-                int altRota = oku.nextIntForNavigation(1, 3); // Kullanıcıdan alt rota seçimi alır
+                altRota = oku.nextIntForNavigation(1, 3); // Kullanıcıdan alt rota seçimi alır
                 break;
 
             case 2:
