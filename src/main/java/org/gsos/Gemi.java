@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public abstract class Gemi {
     // Kullanıcıdan giriş almak için Scanner nesneleri
-    HataYakalama gs = new HataYakalama();
-    Scanner s = new Scanner(System.in);
+
 
     // Gemiye ait özellikler
     String gemiAdi;
@@ -73,7 +72,8 @@ class YukGemisi extends Gemi {
     // Yuk gemisi özelliklerini başlatan yapıcı metot
     YukGemisi() {
         super(); // Üst sınıfın yapıcı metodunu çağır
-
+        HataYakalama gs = new HataYakalama();
+        Scanner s = new Scanner(System.in);
         // Kullanıcıdan gemi detaylarını al
         System.out.println("Gemi adini giriniz:");
         String gemiAdi = s.nextLine();
