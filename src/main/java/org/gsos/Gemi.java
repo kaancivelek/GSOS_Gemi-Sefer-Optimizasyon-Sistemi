@@ -14,7 +14,7 @@ public abstract class Gemi {
     double azamiYuk;
     double yukMik;
     double azamiHiz;
-
+    double ortHız;
     // Varsayılan yapıcı metot
     public Gemi() {}
 
@@ -24,19 +24,18 @@ public abstract class Gemi {
     public abstract void gemiDurdur();
 
     // Gemi motorunu temsil eden iç sınıf
-    public class Motor {
+    public  static class Motor {
         // Motor özellikleri
-        private double metalYorgunlugu;
-        private double RPM;
+
         private double yakitTuketimi;
         private boolean bakimDurumu;
         private String yakitKalitesi;
         private double yakitMik;
 
         // Motor özelliklerini başlatan yapıcı metot
-        public Motor(double metalYorgunlugu, double RPM, double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
-            this.metalYorgunlugu = metalYorgunlugu;
-            this.RPM = RPM;
+        public Motor( double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
+
+
             this.yakitTuketimi = yakitTuketimi;
             this.bakimDurumu = bakimDurumu;
             this.yakitKalitesi = yakitKalitesi;
@@ -63,7 +62,7 @@ public abstract class Gemi {
 
         // Yakıt bilgilerini ekrana yazdıran metot
         public void yakitBilgisi() {
-            System.out.println("Yakit bilgisi:\n Kalite = " + yakitKalitesi + ", Miktar = " + yakitMik);
+            System.out.println("Yakit bilgisi:\n Kalite = " + yakitKalitesi + "\n"+", Miktar = " + yakitMik);
         }
     }
 }
@@ -106,7 +105,7 @@ class YukGemisi extends Gemi {
         this.azamiHiz = hiz;
 
         // Motoru baslat
-        Motor m = new Motor(0, 25, 24, true, "A kalite", 2500);
+        Motor m = new Motor(2,  true, "A kalite",  500);
     }
 
     // Soyut metotların uygulamaları
