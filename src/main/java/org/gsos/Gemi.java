@@ -100,16 +100,20 @@ public abstract class Gemi {
 
                 switch (gs.nextIntForNavigation(1, 6)) {
                     case 1:
-                        this.yapiMalzeme = "Çelik";
+                        this.yapiMalzeme = "Çelik" ;
+                        Simulasyon.aerodinamikSabiti = 1.3;
                         break;
                     case 2:
                         this.yapiMalzeme = "Alüminyum";
+                        Simulasyon.aerodinamikSabiti = 0.9;
                         break;
                     case 3:
                         this.yapiMalzeme = "Fiberglas";
+                        Simulasyon.aerodinamikSabiti = 0.5;
                         break;
                     case 4:
                         this.yapiMalzeme = "Karbon";
+                        Simulasyon.aerodinamikSabiti = 0.3;
                         break;
                 }
 
