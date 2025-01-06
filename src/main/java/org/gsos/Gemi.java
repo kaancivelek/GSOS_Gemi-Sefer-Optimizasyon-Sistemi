@@ -9,7 +9,8 @@ public abstract class Gemi {
     double agirlik;
     double azamiYuk;
     double yukMik;
-    double azamiHiz;
+    double gemiHiz=12;
+    double yakitTuketimi;
 
 
     // Alt sınıfların uygulaması gereken soyut metotlar
@@ -87,6 +88,7 @@ public abstract class Gemi {
                 // Kullanıcıdan gemi detaylarını al
                 System.out.println("Gemi adini giriniz:");
                 String gemiAdi = s.nextLine();
+                System.out.println();
 
 
                 System.out.println(""" 
@@ -101,31 +103,32 @@ public abstract class Gemi {
                 switch (gs.nextIntForNavigation(1, 6)) {
                     case 1:
                         this.yapiMalzeme = "Çelik" ;
-                        Simulasyon.aerodinamikSabiti = 1.3;
+                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 1.3;
                         break;
                     case 2:
                         this.yapiMalzeme = "Alüminyum";
-                        Simulasyon.aerodinamikSabiti = 0.9;
+                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.9;
                         break;
                     case 3:
                         this.yapiMalzeme = "Fiberglas";
-                        Simulasyon.aerodinamikSabiti = 0.5;
+                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.5;
                         break;
                     case 4:
                         this.yapiMalzeme = "Karbon";
-                        Simulasyon.aerodinamikSabiti = 0.3;
+                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.3;
                         break;
                 }
 
 
+
                 System.out.println("Agirlik giriniz:");
-                double agirlik = gs.nextDouble();
+                 this.agirlik = gs.nextDouble();
 
                 System.out.println("Azami yuk giriniz:");
-                double azamiYuk = gs.nextDouble();
+                 this.azamiYuk = gs.nextDouble();
 
                 System.out.println("Yuk miktari giriniz:");
-                double yukMik = gs.nextDouble();
+                 this.yukMik = gs.nextDouble();
 
 
                 // Degerleri özelliklere ata

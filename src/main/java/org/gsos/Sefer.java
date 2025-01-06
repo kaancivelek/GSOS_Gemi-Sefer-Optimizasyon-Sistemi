@@ -15,88 +15,88 @@ package org.gsos;
     int seferMesafesi;//mil
     double ruzgarHizi;//knot
     int ruzgarYonu;
-    double akintiHizi; //km/saat
     int akintiYonu;
+    double akintiHizi; //knot
+    double katEdilenMesafe;
 
-    public  abstract void   çevreselFaktor();
+    public  abstract void   cevreselFaktor();
 
     public Sefer(YukGemisi yukGemisi) {this.yukGemisi = yukGemisi;}
 }
 
 
-class Sefer1 extends Sefer {
+class Mumbai_PortSaid extends Sefer {
     @Override
-    public void çevreselFaktor() {
+    public void cevreselFaktor() {
         this.ruzgarHizi =(int)(Math.random()*5+5);
         this.ruzgarYonu =  Math.random() < 0.5 ? 1 : -1;
         this.akintiHizi =(int)(Math.random()*3+1);
         this.akintiYonu = Math.random() < 0.5 ? 1 : -1;
     }
 
-    public Sefer1(YukGemisi yukGemisi) {
+    public Mumbai_PortSaid(YukGemisi yukGemisi) {
         super(yukGemisi);
-        this.seferNumarasi = 01;
+        this.seferNumarasi = 1;
         this.seferGuzergahi = "Guzergah1";
         this.tehlikeDuzeyi = "AZ TEHLIKELI";
-        this.seferMesafesi =400;
-        this.gelir = (yukGemisi.yukMik*50000-this.gider);
+        this.seferMesafesi =4750; //Deniz Mili
     }
 }
 
 
-class Sefer2 extends Sefer {
+class Santos_Lagos extends Sefer {
     @Override
-    public void çevreselFaktor() {
+    public void cevreselFaktor() {
         this.ruzgarHizi =(int)(Math.random()*5+10);
         this.ruzgarYonu =  Math.random() < 0.5 ? 1 : -1;
         this.akintiHizi =(int)(Math.random()*3+3);
         this.akintiYonu = Math.random() < 0.5 ? 1 : -1;
     }
 
-    public Sefer2(YukGemisi yukGemisi) {
+    public Santos_Lagos(YukGemisi yukGemisi) {
         super(yukGemisi);
         this.seferNumarasi = 02;
         this.seferGuzergahi = "Guzergah2";
         this.tehlikeDuzeyi = "ORTA TEHLİKELİ";
-        this.seferMesafesi =1000;
-        this.gelir = (yukGemisi.yukMik*100000-this.gider);
+        this.seferMesafesi =3350; //Deniz Mili
+
     }
 }
 
-class Sefer3 extends Sefer {
+class Shangai_LosAngels extends Sefer {
     @Override
-    public void çevreselFaktor() {
+    public void cevreselFaktor() {
         this.ruzgarHizi =(int)(Math.random()*5+15);
         this.ruzgarYonu =  Math.random() < 0.5 ? 1 : -1;
         this.akintiHizi =(int)(Math.random()*3+6);
         this.akintiYonu = Math.random() < 0.5 ? 1 : -1;
     }
 
-    public Sefer3(YukGemisi yukGemisi) {
+    public Shangai_LosAngels(YukGemisi yukGemisi) {
         super(yukGemisi);
         this.seferNumarasi = 03;
         this.seferGuzergahi = "Guzergah3";
         this.tehlikeDuzeyi = " TEHLİKELİ";
-        this.seferMesafesi =3500;
-        this.gelir = (yukGemisi.yukMik*200000-this.gider);
+        this.seferMesafesi =6100; // Deniz Mili
+
     }
 }
 
-class Sefer4 extends Sefer {
+class Murnmask_Shangai extends Sefer {
     @Override
-    public void çevreselFaktor() {
+    public void cevreselFaktor() {
         this.ruzgarHizi =(int)(Math.random()*5+20);
         this.ruzgarYonu =  Math.random() < 0.5 ? 1 : -1;
         this.akintiHizi =(int)(Math.random()*3+9);
         this.akintiYonu = Math.random() < 0.5 ? 1 : -1;
     }
 
-    public Sefer4(YukGemisi yukGemisi) {
+    public Murnmask_Shangai(YukGemisi yukGemisi) {
         super(yukGemisi);
         this.seferNumarasi = 04;
         this.seferGuzergahi = "Guzergah4";
         this.tehlikeDuzeyi = "YUKSEK TEHLİKELİ";
-        this.seferMesafesi = 10000;
+        this.seferMesafesi = 12500; //Deniz Mili
         this.gelir = (yukGemisi.yukMik * 500000 - this.gider);
     }
 }
