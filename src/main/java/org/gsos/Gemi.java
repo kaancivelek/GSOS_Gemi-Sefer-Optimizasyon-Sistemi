@@ -44,6 +44,11 @@ public abstract class Gemi {
             // Yakıt bilgilerini ekrana yazdır
             yakitBilgisi();
         }
+        public double yakitHesapla(double ortHiz, int mesafe) {
+            double zaman = mesafe / ortHiz; // Sefer süresi (saat)
+            double kullanilanYakit = zaman * yakitTuketimi; // Yakıt tüketimi (litre)
+            return kullanilanYakit;
+        }
 
         // Bakım işlemi için metot
         public boolean bakim() {
