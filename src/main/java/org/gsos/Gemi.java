@@ -21,14 +21,14 @@ public abstract class Gemi {
      class Motor {
         // Motor özellikleri
 
-         double yakitTuketimi;
+
         private boolean bakimDurumu;
         private String yakitKalitesi;
         private double yakitMik;
 
         // Motor özelliklerini başlatan yapıcı metot
-        public Motor( double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
-            this.yakitTuketimi = yakitTuketimi;
+        public Motor(  boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
+
             this.bakimDurumu = bakimDurumu;
             this.yakitKalitesi = yakitKalitesi;
             this.yakitMik = yakitMik;
@@ -93,8 +93,6 @@ class YukGemisi extends Gemi {
         System.out.println("Yuk miktari giriniz:");
         double yukMik = gs.nextDouble();
 
-        System.out.println("Hiz giriniz:");
-        double hiz = gs.nextDouble();
 
         // Degerleri özelliklere ata
         this.gemiAdi = gemiAdi;
@@ -102,7 +100,7 @@ class YukGemisi extends Gemi {
         this.agirlik = agirlik;
         this.azamiYuk = azamiYuk;
         this.yukMik = yukMik;
-        this.azamiHiz = hiz;
+
 
 
     }
@@ -111,6 +109,7 @@ class YukGemisi extends Gemi {
 
     @Override
     public void gemiCalistir() {
+
         System.out.println("Gemi calistirildi.");
         // Gemiyi calistirma mantigi placeholder
     }
