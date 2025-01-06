@@ -14,7 +14,7 @@ public abstract class Gemi {
     double azamiYuk;
     double yukMik;
     double azamiHiz;
-    double ortHız;
+    double ortHiz;
     // Varsayılan yapıcı metot
     public Gemi() {}
 
@@ -27,13 +27,13 @@ public abstract class Gemi {
     public  static class Motor {
         // Motor özellikleri
 
-        private double yakitTuketimi;
-        private boolean bakimDurumu;
-        private String yakitKalitesi;
-        private double yakitMik;
+        double yakitTuketimi;
+        int bakimDurumu;
+        String yakitKalitesi;
+        double yakitMik;
 
         // Motor özelliklerini başlatan yapıcı metot
-        public Motor( double yakitTuketimi, boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
+        public Motor( double yakitTuketimi, int  bakimDurumu, String yakitKalitesi, double yakitMik) {
 
 
             this.yakitTuketimi = yakitTuketimi;
@@ -110,7 +110,7 @@ class YukGemisi extends Gemi {
         this.azamiHiz = hiz;
 
         // Motoru baslat
-        Motor m = new Motor(2,  true, "A kalite",  500);
+        Motor m = new Motor(2,  100, "A kalite",  500);
     }
 
     // Soyut metotların uygulamaları
