@@ -13,7 +13,7 @@ public class Menu {
         System.out.println("2: Atlas Okyanusu");
         System.out.println("3: Pasifik Okyanusu");
         System.out.println("4: Kuzey Kutup Rotası");
-
+        HataYakalama h = new HataYakalama();
         rota = oku.nextIntForNavigation(1, 4); // Kullanıcıdan ana rota seçimi alır
 
         switch (rota) {
