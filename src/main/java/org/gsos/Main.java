@@ -1,4 +1,10 @@
 package org.gsos;
+//Yapımcılar
+// 232805001 Kaan Civelek
+// 232803007 Naciye Kaya
+// 232805006 Raif Mert İkier
+// 232803045 Nebi Çiftekaldıran
+//Yapımcılar
 
 public class Main {
     public static void main(String[] args) {
