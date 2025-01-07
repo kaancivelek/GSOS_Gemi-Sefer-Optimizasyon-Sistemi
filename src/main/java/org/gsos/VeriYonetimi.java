@@ -1,112 +1,106 @@
 package org.gsos;
+
 import java.util.ArrayList;
 
 
-// T verisiyle calisan soyut sinif. Tum veri yonetim islemleri icin temel gorevleri saglar.
+
+
+// T verisiyle çalışan soyut sınıf. Tüm veri yönetim işlemleri için temel görevleri sağlar.
 abstract class VeriYonetimi<T> {
     private ArrayList<T> veriler;
-Gemi gemi;
-Sefer sefer;
 
     public VeriYonetimi() {
         this.veriler = new ArrayList<>();
     }
 
-    // Yeni kayit ekler.
     public void ekle(T kayit) {
-        this.veriler.add(kayit);
+        this.veriler.add(kayit); // Yeni kayıt ekler
     }
-    public ArrayList<T> getVeriler() {return veriler;}
-    // Alt siniflarin doldurmasi gereken listeleme metodu.
-    public abstract void listele();
+
+    public ArrayList<T> getVeriler() {
+        return veriler; // Verileri döndürür
+    }
+
+    public abstract void listele(); // Listeleme işlemi
 }
 
-// Gemi verilerini listeleyen sinif.
-class GemiListesi extends VeriYonetimi<Gemi> {
+// Gemi verilerini listeleyen sınıf.
+class GemiListesi extends VeriYonetimi<YukGemisi> {
     @Override
     public void listele() {
+        // Tablo başlıkları
+        String boyutlandirma = "| %-15s | %-15s | %-10s | %-15s | %-15s |%n";
+        String cizgi = "+-----------------+-----------------+------------+-----------------+-----------------+";
 
-        // Tablo boyutlandirma ve cizgi formatlari.
-        String boyutlandirma = "| %-15s | %-15s | %-10s | %-15s | %-15s | %-10s |%n";
-        String cizgi = "+-----------------+-----------------+------------+-----------------+-----------------+-----------------+------------+";
-
-        // Tablo basligi yazdir.
+        // Tablo başlıklarını yazdır
         System.out.println(cizgi);
-        System.out.printf(boyutlandirma, "Gemi Adi", "Yapı Malzeme", "Ağırlık(Ton)", "Azami Yük(Ton)", "Yük Mik(Ton)");
+        System.out.printf(boyutlandirma, "Gemi Adı", "Yapı Malzeme", "Ağırlık(Ton)", "Azami Yük(Ton)", "Yük Mik(Ton)");
         System.out.println(cizgi);
 
-        // Gemi verilerini ekrana yazdir.
-        for (Gemi gemi : getVeriler()) {
+        // Gemileri listele
+        for (YukGemisi gemi : getVeriler()) {
             System.out.printf(boyutlandirma,
                     gemi.gemiAdi,
                     gemi.yapiMalzeme,
                     String.format("%.2f", gemi.agirlik),
                     String.format("%.2f", gemi.azamiYuk),
                     String.format("%.2f", gemi.yukMik));
-
         }
         System.out.println(cizgi);
     }
 }
 
-// Sefer kayitlarini listeleyen sinif.
+// Sefer kayıtlarını listeleyen sınıf.
 class SeferKayitlari extends VeriYonetimi<Sefer> {
     @Override
     public void listele() {
-
-        // Tablo boyutlandirma ve cizgi formatlari.
+        // Tablo başlıkları
         String boyutlandirma = "| %-15s | %-15s | %-20s | %-15s | %-20s | %-15s | %-15s |%n";
         String cizgi = "+-----------------+-----------------+----------------------+-----------------+----------------------+-----------------+-----------------+";
 
-        // Tablo basligi yazdir.
+        // Tablo başlıklarını yazdır
         System.out.println(cizgi);
-        System.out.printf(boyutlandirma, "Sefer Numarasi", "Geminin Adi", "Sefer Guzergahi(A-B)", "Sefer Suresi(Saat)", "Tehlike Duzeyi(%)", "Gelir(TL)", "Gider(TL)");
+        System.out.printf(boyutlandirma, "Sefer Numarası", "Gemi Adı", "Sefer Güzergahı", "Tamamlama Süresi", "Tehlike Düzeyi", "Gelir (TL)", "Gider (TL)");
         System.out.println(cizgi);
 
-        // Sefer verilerini ekrana yazdir.
-        for(Sefer sefer : getVeriler()) {
-             System.out.printf(boyutlandirma,
-                     gemi.gemiAdi,
-                     String.format("%.2f", sefer.seferNumarasi),
-                     String.format("%.2f", sefer.seferGuzergahi),
-                     String.format("%.2f", sefer.tamamlamaSuresi),
-                     String.format("%.2f", sefer.tehlikeDuzeyi),
-                     String.format("%.2f", sefer.gelir),
-                     String.format("%.2f", sefer.gider));
-             System.out.println(cizgi);
+        // Seferleri listele
+        for (Sefer sefer : getVeriler()) {
+            System.out.printf(boyutlandirma,
+                    sefer.seferNumarasi,
+                    sefer.gemiAdi,
+                    sefer.seferGuzergahi,
+                    String.format("%.2f", sefer.tamamlamaSuresi),
+                    sefer.tehlikeDuzeyi,
+                    String.format("%.2f", sefer.gelir),
+                    String.format("%.2f", sefer.gider));
         }
+        System.out.println(cizgi);
     }
 }
 
+// Sefer detaylarını listeleyen sınıf.
+class SeferDetaylari {
 
-// Sefer detaylarini listeleyen sinif.
-class SeferDetaylari extends VeriYonetimi<Sefer> {
-    @Override
-    public void listele() {
+    public void listele(Sefer sefer) {
+        // Tablo başlıkları
+        String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-15s | %-15s | %-15s | %-15s |%n";
+        String cizgi = "+----------------------+--------------------------+-----------------+-----------------------+-------------------+-----------------+-----------------+-----------------+";
 
-        // Tablo boyutlandirma ve cizgi formatlari.
-        String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-10s | %-15s | %-15s | %-15s | %-15s |%-15s | %-15s | %-15s |%-15s | %-15s | %-15s |%n";
-        String cizgi = "+----------------------+--------------------------+-----------------+-----------------------+-------------------+-----------------+-----------------+-----------------+-----------------+";
-
-        // Tablo basligi yazdir.
+        // Tablo başlıklarını yazdır
         System.out.println(cizgi);
-        System.out.printf(boyutlandirma, "Seferdeki sure(Saat)", "Kat edilen Mesafe(Deniz Mili)", "Yakit Tuketimi(Ton/saat)", "Gemi Hizi(knot)", "Ruzgar Hizi(knot)", "Ruzgar Yonu", "Akinti Hızı(knot)", "Akinti Yonu");
+        System.out.printf(boyutlandirma, "Seferdeki Süre (Saat)", "Kat Edilen Mesafe (Mil)", "Yakıt Tüketimi (Ton)", "Gemi Hızı (Knot)", "Rüzgar Hızı (Knot)", "Rüzgar Yönü", "Akıntı Hızı (Knot)", "Akıntı Yönü");
         System.out.println(cizgi);
-
-        // Sefer detaylarini ekrana yazdir.
-        for (Sefer sefer : getVeriler()) {
 
             System.out.printf(boyutlandirma,
-                    String.format("%.2f", sefer.seferdekiSure),
-                    String.format("%.2f", sefer.seferMesafesi),
-                    String.format("%.2f", gemi.yakitTuketimi),
-                    String.format("%.2f", gemi.gemiHiz),
+                    String.format("%d", sefer.seferdekiSure),
+                    String.format("%.2f", sefer.katEdilenMesafe),
+                    String.format("%.2f", sefer.yakitTuketimi),
+                    String.format("%.2f", sefer.gemiHiz),
                     String.format("%.2f", sefer.ruzgarHizi),
-                    String.format("%.2f", sefer.ruzgarYonu),
+                    String.format("%d", sefer.ruzgarYonu),
                     String.format("%.2f", sefer.akintiHizi),
-                    String.format("%.2f", sefer.akintiYonu));
+                    String.format("%d", sefer.akintiYonu));
             System.out.println(cizgi);
-
-        }
     }
 }
+

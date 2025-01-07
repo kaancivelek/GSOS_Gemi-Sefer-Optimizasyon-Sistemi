@@ -2,98 +2,116 @@ package org.gsos;
 
 public class Main {
     public static void main(String[] args) {
-
-        do{
+        do {
+            // Veri yönetimi nesnelerini oluştur
             SeferKayitlari seferKayitlari = new SeferKayitlari();
             GemiListesi gemilistesi = new GemiListesi();
             SeferDetaylari seferDetaylari = new SeferDetaylari();
 
-
+            // Yük gemisi oluştur ve listeye ekle
             YukGemisi yukGemisi = new YukGemisi();
+            // YukGemisi constructor'ı zaten kullanıcıdan girdi alıyor
             gemilistesi.ekle(yukGemisi);
+            gemilistesi.listele();
 
-HataYakalama oku = new HataYakalama();
-            System.out.println("Rotanizi seciniz.");
-int secim= oku.nextIntForNavigation(1,4);
+            // Rota seçimi
+            HataYakalama oku = new HataYakalama();
+            System.out.println("\nRotanızı seçiniz:");
+            System.out.println("1. Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");
+            System.out.println("2. Brezilya (Santos) - Nijerya (Lagos)");
+            System.out.println("3. Çin (Shanghai) - ABD (Los Angeles)");
+            System.out.println("4. Rusya (Murmansk) - Çin (Shanghai)");
+            int secim = oku.nextIntForNavigation(1, 4);
 
+            // Sefer oluştur
+            Sefer sefer;
+            switch(secim) {
+                case 1:
+                    System.out.println("\nSeçilen rota: Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");
+                    sefer = new Mumbai_PortSaid(yukGemisi);
+                    break;
+                case 2:
+                    System.out.println("\nSeçilen rota: Brezilya (Santos) - Nijerya (Lagos)");
+                    sefer = new Santos_Lagos(yukGemisi);
+                    break;
+                case 3:
+                    System.out.println("\nSeçilen rota: Çin (Shanghai) - ABD (Los Angeles)");
+                    sefer = new Shanghai_LosAngeles(yukGemisi);
+                    break;
+                case 4:
+                    System.out.println("\nSeçilen rota: Rusya (Murmansk) - Çin (Shanghai)");
+                    sefer = new Murmansk_Shanghai(yukGemisi);
+                    break;
+                default:
+                    System.out.println("\nVarsayılan rota: Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");
+                    sefer = new Mumbai_PortSaid(yukGemisi);
+                    break;
+            }
 
-Sefer sefer;
-switch(secim){
-
-            case 1: System.out.println("Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");sefer =new Mumbai_PortSaid(yukGemisi);break;
-            case 2: System.out.println("Brezilya (Santos) - Nijerya (Lagos)"); sefer =new Santos_Lagos(yukGemisi); break;
-            case 3: System.out.println("Çin (Shanghai) - ABD (Los Angeles)"); sefer =new Shangai_LosAngels(yukGemisi);  break;
-            case 4: System.out.println("Rusya (Murmansk) - Çin (Shanghai)"); sefer =new Murnmask_Shangai(yukGemisi);  break;
-    default: System.out.println("Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)"); sefer = new Mumbai_PortSaid(yukGemisi); break;
-        }
-            System.out.println("patlamadi");
-
+            // Başlangıç değerlerini ayarla
+            sefer.gelir = 0.0;
+            sefer.gider = 0.0;
+            sefer.katEdilenMesafe = 0.0;
+            sefer.tamamlamaSuresi = MatematikselIslemler.tahminiVarisZamaniHesapla(yukGemisi.gemiHiz, sefer.seferMesafesi);
+            String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-15s | %-15s | %-15s | %-15s |%n";
+            // Sefer kaydını ekle ve listele
             seferKayitlari.ekle(sefer);
-            sefer.tamamlamaSuresi= org.gsos.MatematikselIslemler.tahminiVarisZamaniHesapla(yukGemisi.gemiHiz, sefer.seferMesafesi);
-                   sefer.seferdekiSure=0;
-        while(sefer.seferdekiSure<=sefer.tamamlamaSuresi){
-            sefer.cevreselFaktor();
-sefer.seferdekiSure++;
-sefer.katEdilenMesafe+= yukGemisi.gemiHiz;
-yukGemisi.yakitTuketimi= org.gsos.MatematikselIslemler.yakitTuketimiHesapla(yukGemisi.gemiHiz,sefer.akintiHizi,sefer.akintiYonu,sefer.ruzgarHizi,sefer.ruzgarYonu);
-seferDetaylari.ekle(sefer);
-        }
+            System.out.println("\n=== SEFER KAYDI ===");
+            System.out.printf(boyutlandirma, "Seferdeki Süre (Saat)", "Kat Edilen Mesafe (Mil)", "Yakıt Tüketimi (Ton)", "Gemi Hızı (Knot)", "Rüzgar Hızı (Knot)", "Rüzgar Yönü", "Akıntı Hızı (Knot)", "Akıntı Yönü");
+            seferKayitlari.listele();
 
-seferDetaylari.listele();
-break;
+            // Sefer simulasyonu
+            System.out.println("\n=== SEFER SİMÜLASYONU BAŞLIYOR ===");
+            sefer.seferdekiSure = 0;
+            double toplamYakitTuketimi = 0.0;
+            String cizgi = "+----------------------+--------------------------+-----------------+-----------------------+-------------------+-----------------+-----------------+-----------------+";
+            System.out.println("\n=== SEFER DETAYLARI ===");
+            while(sefer.seferdekiSure <= sefer.tamamlamaSuresi) {
+                // Çevresel faktörleri güncelle
+                sefer.cevreselFaktor();
 
-        }while(true);
+                // Yakıt tüketimini hesapla ve toplama ekle
+                double saatlikYakitTuketimi = MatematikselIslemler.yakitTuketimiHesapla(
+                        yukGemisi.gemiHiz,
+                        sefer.akintiHizi,
+                        sefer.akintiYonu,
+                        sefer.ruzgarHizi,
+                        sefer.ruzgarYonu
+                );
+                toplamYakitTuketimi += saatlikYakitTuketimi;
 
-    }}
+                // Değerleri güncelle
+                sefer.yakitTuketimi = saatlikYakitTuketimi;
+                sefer.katEdilenMesafe += yukGemisi.gemiHiz;
+                sefer.seferdekiSure++;
+
+                // Her saatin detayını kaydet
+
+
+                // Maliyet hesapları (1 ton yakıt = 52,920 TL)
+                sefer.gider = toplamYakitTuketimi * 52920;
+                sefer.gelir = sefer.gider * 1.2; // %20 kar
+
+                // Final durumu göster
+
+                seferDetaylari.listele(sefer);
+            }
+
+            System.out.println("\nYeni bir sefer planlamak için herhangi bir tuşa basın (Çıkış için CTRL+C)");
+            try {
+                System.in.read();
+            } catch(Exception e) {
+                break;
+            }
+
+        } while(true);
+    }
+}
 
 
 /*
-Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)
-
-Yaklaşık Mesafe: 4.500 - 5.000 deniz mili.
-Bu rota, Arap Denizi'nden Kızıldeniz'e ve Süveyş Kanalı'na doğru ilerler.
-Brezilya (Santos) - Nijerya (Lagos)
-
-Yaklaşık Mesafe: 3.200 - 3.500 deniz mili.
-Güney Atlantik Okyanusu'nu geçerek bir rota izler.
-Çin (Shanghai) - ABD (Los Angeles)
-
-Yaklaşık Mesafe: 6.000 - 6.200 deniz mili.
-Pasifik Okyanusu üzerinden bir rota takip edilir.
-Rusya (Murmansk) - Çin (Shanghai)
-
-Yaklaşık Mesafe: 12.000 - 13.000 deniz mili.
-Bu rota genellikle Avrupa'nın kuzeyinden ve Asya'nın doğu kıyılarından geçerek ilerler.
-
-
-Hint Okyanusu
-•	Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)
-Rotanın özellikleri: Hindistan’dan Süveyş Kanalı’na kadar deniz trafiği genellikle yoğundur. Bu rota, Avrupa ve Asya arasındaki en önemli ticaret yollarından biridir.
-•	Hindistan (Chennai) - Endonezya (Jakarta)
-Rotanın özellikleri: Güneydoğu Asya bağlantısı, genellikle petrol ve mineral yük taşımacılığında kullanılır. Bengal Körfezi ve Malakka Boğazı üzerinden geçer.
-•	Avustralya (Perth) - Güney Afrika (Durban)
-Rotanın özellikleri: Hint Okyanusu boyunca uzun mesafeli bir rota. Çoğunlukla doğal kaynak ve mineral taşımacılığı için kullanılır.
-________________________________________
-Atlas Okyanusu
-•	ABD (New York) - Avrupa (Rotterdam, Hollanda)
-Rotanın özellikleri: Kuzey Atlantik ticaret hattı. Dünyanın en yoğun ticaret yollarından biridir, konteyner taşımacılığı yaygındır.
-•	Brezilya (Santos) - Nijerya (Lagos)
-Rotanın özellikleri: Güney Atlantik üzerindeki rota, genellikle tarım ürünleri ve petrol taşımacılığı için kullanılır.
-•	Kanada (Halifax) - Birleşik Krallık (Liverpool)
-Rotanın özellikleri: Kuzey Atlantik üzerindeki bu rota, denizcilik açısından eski bir gelenektir. Çoğunlukla genel kargo ve konteyner taşımacılığı yapılır.
-________________________________________
-Pasifik Okyanusu
-•	Çin (Shanghai) - ABD (Los Angeles)
-Rotanın özellikleri: Pasifik’teki en yoğun ticaret rotalarından biri. Elektronik ve diğer tüketim mallarını taşımada kullanılır.
-•	Japonya (Tokyo) - Avustralya (Sydney)
-Rotanın özellikleri: Asya-Pasifik ticareti için önemli bir rota. Endüstriyel ürünler ve kömür taşımacılığı bu hat üzerinde yaygındır.
-•	Şili (Valparaiso) - Çin (Guangzhou)
-Rotanın özellikleri: Latin Amerika ile Asya arasında bakır, meyve ve mineral taşımacılığı için kullanılır.
-________________________________________
-Kuzey Kutup Rotası
-•	Rusya (Murmansk) - Çin (Shanghai)
-Rotanın özellikleri: Arktik rotası, buz kırıcı gemilerle Kuzey Kutbu boyunca geçiş yapılmasını sağlar. Hızlı ama risklidir.
 
 
 
-* */
+
+ */
