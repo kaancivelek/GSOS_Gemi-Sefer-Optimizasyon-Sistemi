@@ -3,7 +3,6 @@ package org.gsos;
 public class Main {
     public static void main(String[] args) {
         HataYakalama oku = new HataYakalama();
-        int temp;
         int secim;
         SeferKayitlari seferKayitlari = new SeferKayitlari();
         GemiListesi gemilistesi = new GemiListesi();
@@ -27,11 +26,13 @@ else{
 
         case 2:YukGemisi yeniyukGemisi = new YukGemisi(); gemilistesi.ekle(yeniyukGemisi);break;
 
-        case 3:if(seferKayitlari.getVeriler().isEmpty()){System.out.println("Sefer bulunmuyor.");break;}seferKayitlari.listele();break;
+        case 3:if(seferKayitlari.getVeriler().isEmpty()){
+            System.out.println("Sefer bulunmuyor.");break;}
+        else{seferKayitlari.listele();break;}
 
         case 4:if(gemilistesi.getVeriler().isEmpty()){
-            System.out.println("Goruntulenecek gemi yok.");
-        }gemilistesi.listele();break;
+            System.out.println("Goruntulenecek gemi yok.");break;}
+        else{gemilistesi.listele();break;}
 
         default: System.out.println("BUG!");break;
 
@@ -43,7 +44,7 @@ else{
             gemilistesi.listele();
             System.out.println("Kacinci gemiyi istiyorsunuz?.");
           secim = oku.nextIntForNavigation(1,gemilistesi.getVeriler().size());
-          YukGemisi yukGemisi = gemilistesi.getVeriler().get(secim);
+          YukGemisi yukGemisi = gemilistesi.getVeriler().get(secim-1);
 
             System.out.println("\nRotanızı seçiniz:");
             System.out.println("1. Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");
@@ -81,11 +82,14 @@ else{
             sefer.gider = 0.0;
             sefer.katEdilenMesafe = 0.0;
             sefer.tamamlamaSuresi = MatematikselIslemler.tahminiVarisZamaniHesapla(yukGemisi.gemiHiz, sefer.seferMesafesi);
-            String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-15s | %-15s | %-15s | %-15s |%n";
+
+
+
+
+
             // Sefer kaydını ekle ve listele
             seferKayitlari.ekle(sefer);
-            System.out.println("\n=== SEFER KAYDI ===");
-            System.out.printf(boyutlandirma, "Seferdeki Süre (Saat)", "Kat Edilen Mesafe (Mil)", "Yakıt Tüketimi (Ton)", "Gemi Hızı (Knot)", "Rüzgar Hızı (Knot)", "Rüzgar Yönü", "Akıntı Hızı (Knot)", "Akıntı Yönü");
+
             seferKayitlari.listele();
 
             // Sefer simulasyonu
@@ -93,7 +97,18 @@ else{
             sefer.seferdekiSure = 0;
             double toplamYakitTuketimi = 0.0;
             String cizgi = "+----------------------+--------------------------+-----------------+-----------------------+-------------------+-----------------+-----------------+-----------------+";
-            System.out.println("\n=== SEFER DETAYLARI ===");
+            String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-15s | %-15s | %-15s | %-15s |%n";
+
+            System.out.println(cizgi);
+            System.out.printf(boyutlandirma,
+                    "Seferdeki Süre (Saat)",
+                    "Kat Edilen Mesafe (Mil)",
+                    "Yakıt Tüketimi (Ton)",
+                    "Gemi Hızı (Knot)",
+                    "Rüzgar Hızı (Knot)",
+                    "Rüzgar Yönü",
+                    "Akıntı Hızı (Knot)",
+                    "Akıntı Yönü");
             while(sefer.seferdekiSure <= sefer.tamamlamaSuresi) {
                 // Çevresel faktörleri güncelle
                 sefer.cevreselFaktor();

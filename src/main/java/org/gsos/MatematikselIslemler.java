@@ -24,7 +24,7 @@ static double aerodinamikSabiti;
     //4'e düşüyor hızımız ancak tekrar onu 12 yapmak için 8 daha harcayacağız yani harcama 12+8=20 şeklinde oldu
    static double yakitTuketimiHesapla(double hiz, double akintiHizi, int akintiYonu ,double ruzgarHizi, int ruzgarYonu) {
         double cevreselFaktor= akintiHizi*akintiYonu+ruzgarHizi*ruzgarYonu*aerodinamikSabiti;
-if(cevreselFaktor<0){Math.abs(cevreselFaktor);return hiz+cevreselFaktor*0.15;}
+if(cevreselFaktor<0){cevreselFaktor=Math.abs(cevreselFaktor);return hiz+cevreselFaktor*0.15;}
 //hızımız aşağı yukarı 12 knot olduğunu düşünelim buradaki olay 12-8 olduğunda mesela
 //4'e düşüyor hızımız ancak tekrar onu 12 yapmak için 8 daha harcayacağız yani harcama 12-8=4 şeklinde oldu
 else{ return hiz-cevreselFaktor*0.15;}}//10 knotta giden bir yuk gemisi takribi 1.5ton saatte yakıt tuketır.} buradaki 0.15 matematiksel modelin türettiği aradaki ilişki katsayısı

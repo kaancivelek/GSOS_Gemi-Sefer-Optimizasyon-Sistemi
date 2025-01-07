@@ -59,7 +59,6 @@ class SeferKayitlari extends VeriYonetimi<Sefer> {
         String cizgi = "+-----------------+-----------------+----------------------+-----------------+----------------------+-----------------+-----------------+";
 
         // Tablo başlıklarını yazdır
-        System.out.println(cizgi);
         System.out.printf(boyutlandirma, "Sefer Numarası", "Gemi Adı", "Sefer Güzergahı", "Tamamlama Süresi", "Tehlike Düzeyi", "Gelir (TL)", "Gider (TL)");
         System.out.println(cizgi);
 
@@ -82,25 +81,27 @@ class SeferKayitlari extends VeriYonetimi<Sefer> {
 class SeferDetaylari {
 
     public void listele(Sefer sefer) {
-        // Tablo başlıkları
+        // Tablo başlıkları ve çizgi
         String boyutlandirma = "| %-20s | %-25s | %-15s | %-20s | %-15s | %-15s | %-15s | %-15s |%n";
         String cizgi = "+----------------------+--------------------------+-----------------+-----------------------+-------------------+-----------------+-----------------+-----------------+";
 
         // Tablo başlıklarını yazdır
-        System.out.println(cizgi);
-        System.out.printf(boyutlandirma, "Seferdeki Süre (Saat)", "Kat Edilen Mesafe (Mil)", "Yakıt Tüketimi (Ton)", "Gemi Hızı (Knot)", "Rüzgar Hızı (Knot)", "Rüzgar Yönü", "Akıntı Hızı (Knot)", "Akıntı Yönü");
+
         System.out.println(cizgi);
 
-            System.out.printf(boyutlandirma,
-                    String.format("%d", sefer.seferdekiSure),
-                    String.format("%.2f", sefer.katEdilenMesafe),
-                    String.format("%.2f", sefer.yakitTuketimi),
-                    String.format("%.2f", sefer.gemiHiz),
-                    String.format("%.2f", sefer.ruzgarHizi),
-                    String.format("%d", sefer.ruzgarYonu),
-                    String.format("%.2f", sefer.akintiHizi),
-                    String.format("%d", sefer.akintiYonu));
-            System.out.println(cizgi);
+        // Sefer verilerini yazdır
+        System.out.printf(boyutlandirma,
+                sefer.seferdekiSure,
+                String.format("%.2f", sefer.katEdilenMesafe),
+                String.format("%.2f", sefer.yakitTuketimi),
+                String.format("%.2f", sefer.gemiHiz),
+                String.format("%.2f", sefer.ruzgarHizi),
+                sefer.ruzgarYonu,
+                String.format("%.2f", sefer.akintiHizi),
+                sefer.akintiYonu);
+
+        System.out.println(cizgi);
     }
+
 }
 
