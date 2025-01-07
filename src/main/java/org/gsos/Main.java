@@ -167,7 +167,7 @@ public class Main {
                             if(yakitMiktari <= 0.0) {
                                 System.out.println("Yakit ikmali yapiliyor.");
                                 sefer.gider+=5*52920;
-                                yakitMiktari += 5;
+                                yakitMiktari += 50;
                             }
                             yukGemisi.motoraEris().bakimKontrolEt(sefer.seferdekiSure);
                         }

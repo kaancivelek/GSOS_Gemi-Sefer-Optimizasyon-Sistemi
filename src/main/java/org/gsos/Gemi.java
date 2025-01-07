@@ -165,7 +165,7 @@ class YukGemisi extends Gemi {
 
         System.out.println("Gemi Olusturuldu.");
         // Motor nesnesi sınıf seviyesinde başlatılıyor
-        motor = new Motor(true, "A kalite", 500);
+        motor = new Motor(true, "A kalite", 300);
         motor.motorCalistir();
         gemiCalistir();
         motor.yakitBilgisi();
