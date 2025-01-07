@@ -2,28 +2,56 @@ package org.gsos;
 
 public class Main {
     public static void main(String[] args) {
-        do {
-            // Veri yönetimi nesnelerini oluştur
-            SeferKayitlari seferKayitlari = new SeferKayitlari();
-            GemiListesi gemilistesi = new GemiListesi();
-            SeferDetaylari seferDetaylari = new SeferDetaylari();
+        HataYakalama oku = new HataYakalama();
+        int temp;
+        int secim;
+        SeferKayitlari seferKayitlari = new SeferKayitlari();
+        GemiListesi gemilistesi = new GemiListesi();
+        SeferDetaylari seferDetaylari = new SeferDetaylari();
 
-            // Yük gemisi oluştur ve listeye ekle
-            YukGemisi yukGemisi = new YukGemisi();
-            // YukGemisi constructor'ı zaten kullanıcıdan girdi alıyor
-            gemilistesi.ekle(yukGemisi);
+
+        while(true){
+            System.out.println("""
+                        1- Yeni sefere Basla.
+                        2- Yeni gemi ekle.
+                        3- Seferleri listele.
+                        4- Gemileri Listele.
+                        
+                        5- Cikis yap.
+                        """);
+        secim = oku.nextIntForNavigation(1,5);
+if(secim == 5){break;}
+else{
+
+    switch(secim){
+
+        case 2:YukGemisi yeniyukGemisi = new YukGemisi(); gemilistesi.ekle(yeniyukGemisi);break;
+
+        case 3:if(seferKayitlari.getVeriler().isEmpty()){System.out.println("Sefer bulunmuyor.");break;}seferKayitlari.listele();break;
+
+        case 4:if(gemilistesi.getVeriler().isEmpty()){
+            System.out.println("Goruntulenecek gemi yok.");
+        }gemilistesi.listele();break;
+
+        default: System.out.println("BUG!");break;
+
+        case 1:if(gemilistesi.getVeriler().isEmpty()){
+
+            System.out.println("Sefere cikacak gemi yok.");
+        YukGemisi yukGemisi = new YukGemisi(); gemilistesi.ekle(yukGemisi);}
+
             gemilistesi.listele();
+            System.out.println("Kacinci gemiyi istiyorsunuz?.");
+          secim = oku.nextIntForNavigation(1,gemilistesi.getVeriler().size());
+          YukGemisi yukGemisi = gemilistesi.getVeriler().get(secim);
 
-            // Rota seçimi
-            HataYakalama oku = new HataYakalama();
             System.out.println("\nRotanızı seçiniz:");
             System.out.println("1. Hindistan (Mumbai) - Mısır (Süveyş Kanalı, Port Said)");
             System.out.println("2. Brezilya (Santos) - Nijerya (Lagos)");
             System.out.println("3. Çin (Shanghai) - ABD (Los Angeles)");
             System.out.println("4. Rusya (Murmansk) - Çin (Shanghai)");
-            int secim = oku.nextIntForNavigation(1, 4);
 
-            // Sefer oluştur
+            secim = oku.nextIntForNavigation(1, 4);
             Sefer sefer;
             switch(secim) {
                 case 1:
@@ -48,7 +76,7 @@ public class Main {
                     break;
             }
 
-            // Başlangıç değerlerini ayarla
+
             sefer.gelir = 0.0;
             sefer.gider = 0.0;
             sefer.katEdilenMesafe = 0.0;
@@ -95,23 +123,22 @@ public class Main {
                 // Final durumu göster
 
                 seferDetaylari.listele(sefer);
-            }
 
-            System.out.println("\nYeni bir sefer planlamak için herhangi bir tuşa basın (Çıkış için CTRL+C)");
-            try {
-                System.in.read();
-            } catch(Exception e) {
-                break;
-            }
+        }
+        break;
 
-        } while(true);
+
     }
+
 }
 
 
-/*
 
 
+            }
 
 
- */
+        }
+
+
+    }

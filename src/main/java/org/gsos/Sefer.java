@@ -30,6 +30,13 @@ public abstract class Sefer {
         this.yakitTuketimi = yukGemisi.yakitTuketimi;
         this.gemiHiz = yukGemisi.gemiHiz;
         this.gemiAdi = yukGemisi.gemiAdi;
+
+
+
+
+
+
+
     }
 }
 
