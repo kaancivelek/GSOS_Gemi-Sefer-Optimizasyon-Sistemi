@@ -93,7 +93,7 @@ class SeferDetaylari {
         System.out.printf(boyutlandirma,
                 sefer.seferdekiSure,
                 String.format("%.2f", sefer.katEdilenMesafe),
-                String.format("%.2f", sefer.yakitTuketimi),
+                String.format("%.2f", sefer.yukGemisi.motoraEris().yakitTuketimi),
                 String.format("%.2f", sefer.gemiHiz),
                 String.format("%.2f", sefer.ruzgarHizi),
                 sefer.ruzgarYonu,

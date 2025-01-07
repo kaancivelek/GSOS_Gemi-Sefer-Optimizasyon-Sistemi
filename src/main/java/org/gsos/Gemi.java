@@ -9,150 +9,181 @@ public abstract class Gemi {
     double agirlik;
     double azamiYuk;
     double yukMik;
-    double gemiHiz=12;
-    double yakitTuketimi;
-
+    double gemiHiz = 12;
 
     // Alt sınıfların uygulaması gereken soyut metotlar
-
     public abstract void gemiCalistir();
 
     public abstract void gemiDurdur();
 
     // Gemi motorunu temsil eden iç sınıf
     class Motor {
-        // Motor özellikleri
-        private boolean bakimDurumu;
+        boolean bakimDurumu;
         private String yakitKalitesi;
-        private double yakitMik;
-        private int toplamCalismaSaati; // Motorun toplam çalışma süresi
-        private int geciciCalismaSaati; // 50 saatlik döngü için geçici sayaç
+        double yakitMik;
+        private int toplamCalismaSaati;
+        private int geciciCalismaSaati;
+        double yakitTuketimi;
 
-        // Motor özelliklerini başlatan yapıcı metot
         public Motor(boolean bakimDurumu, String yakitKalitesi, double yakitMik) {
             this.bakimDurumu = bakimDurumu;
             this.yakitKalitesi = yakitKalitesi;
             this.yakitMik = yakitMik;
-            this.toplamCalismaSaati = 0; // Başlangıçta toplam çalışma saati 0
-            this.geciciCalismaSaati = 0; // Geçici sayaç 0
-            yakitBilgisi(); // Yakıt bilgilerini yazdır
+            this.yakitTuketimi=0;
+            System.out.println("Motor olusturuldu.");
         }
 
-        // Bakım durumu kontrol metodu
-        public void bakimKontrolEt() {
-            if (geciciCalismaSaati >= 50) {
-                toplamCalismaSaati += geciciCalismaSaati; // Geçici çalışma saatlerini toplam saate ekle
-                geciciCalismaSaati = 0; // Geçici sayaç sıfırlanır
-                bakimDurumu = false; // Bakım gerekli hale gelir
+        public void bakimKontrolEt(int seferdekiSure) {
+            if (seferdekiSure%2==0) {//iki gunde bir
+                bakimDurumu = false;
                 System.out.println("Motorun bakım süresi doldu! Lütfen bakım yapınız.");
+
+                bakimYap();
             }
         }
 
-        // Bakım yapma metodu
-        public void bakimYap() {
-            bakimDurumu = true; // Bakım durumu yeniden aktif edilir
+        private void bakimYap() {
+            bakimDurumu = true;
             System.out.println("Motor bakımı tamamlandı.");
         }
 
-        // Motoru çalıştıran metot
         public void motorCalistir() {
             if (bakimDurumu) {
                 System.out.println("Motor çalıştırıldı.");
-                geciciCalismaSaati++; // Geçici çalışma saati artırılır
-                bakimKontrolEt(); // Çalışma saatine göre bakım durumu kontrol edilir
+                geciciCalismaSaati++;
             } else {
                 System.out.println("Motor çalıştırılamıyor! Lütfen önce bakım yapınız.");
             }
         }
 
-        // Motoru durduran metot
         public void motorDurdur() {
             System.out.println("Motor durduruldu.");
         }
 
-        // Yakıt bilgilerini ekrana yazdıran metot
         public void yakitBilgisi() {
-            System.out.println("Yakıt bilgisi:\n Kalite = " + yakitKalitesi + ", Miktar = " + yakitMik);
+            System.out.println("Yakıt bilgisi:\n Kalite = " + yakitKalitesi + ", Miktar = " + yakitMik + "(TON)");
         }
     }
 }
-        class YukGemisi extends Gemi {
 
-            // Yuk gemisi özelliklerini başlatan yapıcı metot
-            YukGemisi() {
-
-                super(); // Üst sınıfın yapıcı metodunu çağır
-                Motor motor = new Motor(true, "A kalite", 500);
-                HataYakalama gs = new HataYakalama();
-                Scanner s = new Scanner(System.in);
-                // Kullanıcıdan gemi detaylarını al
-                System.out.println("Gemi adini giriniz:");
-                String gemiAdi = s.nextLine();
-                System.out.println();
-
-
-                System.out.println(""" 
-                        Geminin yapildigi malzemeyi seciniz.
-                        
-                        Yapi malzemesi:1-Celik
-                        Yapi malzemesi:2-Aluminyum
-                        Yapi malzemesi:3-Fiberglas
-                        Yapi malzemesi:4-Karbon
-                        """);
-
-                switch (gs.nextIntForNavigation(1, 6)) {
-                    case 1:
-                        this.yapiMalzeme = "Çelik" ;
-                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 1.3;
-                        break;
-                    case 2:
-                        this.yapiMalzeme = "Alüminyum";
-                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.9;
-                        break;
-                    case 3:
-                        this.yapiMalzeme = "Fiberglas";
-                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.5;
-                        break;
-                    case 4:
-                        this.yapiMalzeme = "Karbon";
-                        org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.3;
-                        break;
-                }
+class YukGemisi extends Gemi {
+    // Motor nesnesini sınıf seviyesinde tanımlıyoruz
+    private Motor motor;
+    YukGemisi(String gemiAdi, int gemiMalzemesi, double agirlik, double azamiYukKapasitesi, double yukMiktari) {
+        super();
+        this.gemiAdi = gemiAdi;
+        switch (gemiMalzemesi) {
+            case 1:
+                this.yapiMalzeme = "Çelik";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 1.3;
+                break;
+            case 2:
+                this.yapiMalzeme = "Alüminyum";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.9;
+                break;
+            case 3:
+                this.yapiMalzeme = "Fiberglas";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.5;
+                break;
+            case 4:
+                this.yapiMalzeme = "Karbon";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.3;
+                break;
+        }
+        this.agirlik = agirlik;
+        this.azamiYuk = azamiYukKapasitesi;
+        this.yukMik = yukMiktari;
 
 
+        System.out.println("Gemi Olusturuldu.");
+        // Motor nesnesi sınıf seviyesinde başlatılıyor
+        motor = new Motor(true, "A kalite", 500);
+        motor.motorCalistir();
+        gemiCalistir();
+        motor.yakitBilgisi();
+        System.out.println("Gemi sefere hazir.");
+    }
+    YukGemisi() {
+        super();
+        HataYakalama gs = new HataYakalama();
+        Scanner s = new Scanner(System.in);
 
-                System.out.println("Agirlik giriniz:");
-                 this.agirlik = gs.nextDouble();
+        System.out.println("Gemi adini giriniz:");
+        this.gemiAdi = s.nextLine();
+        System.out.println();
 
-                System.out.println("Azami yuk giriniz:");
-                 this.azamiYuk = gs.nextDouble();
+        System.out.println("""
+                Geminin yapildigi malzemeyi seciniz.
 
-                System.out.println("Yuk miktari giriniz:");
-                 this.yukMik = gs.nextDouble();
+                Yapi malzemesi:1-Celik
+                Yapi malzemesi:2-Aluminyum
+                Yapi malzemesi:3-Fiberglas
+                Yapi malzemesi:4-Karbon
+                """);
 
+        switch (gs.nextIntForNavigation(1, 6)) {
+            case 1:
+                this.yapiMalzeme = "Çelik";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 1.3;
+                break;
+            case 2:
+                this.yapiMalzeme = "Alüminyum";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.9;
+                break;
+            case 3:
+                this.yapiMalzeme = "Fiberglas";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.5;
+                break;
+            case 4:
+                this.yapiMalzeme = "Karbon";
+                org.gsos.MatematikselIslemler.aerodinamikSabiti = 0.3;
+                break;
+        }
 
-                // Degerleri özelliklere ata
-                this.gemiAdi = gemiAdi;
-                this.yapiMalzeme = yapiMalzeme;
-                this.agirlik = agirlik;
-                this.azamiYuk = azamiYuk;
-                this.yukMik = yukMik;
+        System.out.println("Agirlik giriniz(TIPIK BIR YUK GEMISI ICIN 80 BİN İE 100 BIN TON ARASI DEGISIR ):");
+        this.agirlik = gs.nextIntForNavigation(80000, 100000);
 
-
-            }
-
-            // Soyut metotların uygulamaları
-
-            @Override
-            public void gemiCalistir() {
-
-                System.out.println("Gemi calistirildi.");
-                // Gemiyi calistirma mantigi placeholder
-            }
-
-            @Override
-            public void gemiDurdur() {
-                System.out.println("Gemi durduruldu.");
-                // Gemiyi durdurma mantigi placeholder
+        System.out.println("Azami yuk giriniz(TIPIK BIR YUK GEMISI ICIN 50 BİN İLE 80 BİN TON ARASI DEGISIR):");
+        while (true) {
+            this.azamiYuk = gs.nextDouble();
+            if (azamiYuk >= 50000 && azamiYuk <= 80000) {
+                break;
+            } else {
+                System.out.println("HATA: AZAMI YUK KAPASITESI 50 BIN ILE 80 BIN ARASI OLMALIDIR");
             }
         }
+
+        System.out.println("Yuk miktari giriniz:");
+        while (true) {
+            this.yukMik = gs.nextDouble();
+            if (yukMik <= azamiYuk) {
+                break;
+            } else {
+                System.out.println("YUK MIKTARI AZAMI YUKTEN YUKSEK OLAMAZ");
+            }
+        }
+
+        System.out.println("Gemi Olusturuldu.");
+        // Motor nesnesi sınıf seviyesinde başlatılıyor
+        motor = new Motor(true, "A kalite", 500);
+        motor.motorCalistir();
+        gemiCalistir();
+        motor.yakitBilgisi();
+        System.out.println("Gemi sefere hazir.");
+    }
+
+    // Motor nesnesine erişim sağlayan metod
+    public Motor motoraEris() {
+        return motor;
+    }
+
+    @Override
+    public void gemiCalistir() {
+        System.out.println("Gemi calistirildi.");
+    }
+
+    @Override
+    public void gemiDurdur() {
+        System.out.println("Gemi durduruldu.");
+    }
+}
